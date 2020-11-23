@@ -1,4 +1,4 @@
-let lang = prompt('Enter your langauage (en / ru)', 'en');
+let lang = prompt('Enter your language (en / ru)', 'en');
 const weekRu = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'],
     weekEn = ['monday', 'thuesday', 'wednesday', 'thurday', 'friday', 'saturday', 'sunday'];
 
