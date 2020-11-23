@@ -3,5 +3,6 @@ const weekRu = ['понедельник', 'вторник', 'среда', 'че�
     weekEn = ['monday', 'thuesday', 'wednesday', 'thurday', 'friday', 'saturday', 'sunday'];
 
 if (lang === 'ru') alert (`${weekRu.join(', ')}`)
-    else alert (`${weekEn.join(', ')}`);
+    else if (lang === 'en') alert (`${weekRu.join(', ')}`)
+    else alert ('Вы ввели некорректный запрос');
 

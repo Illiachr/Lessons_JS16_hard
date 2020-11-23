@@ -8,5 +8,6 @@ switch (lang) {
     case 'en':
         alert (`${weekEn.join(', ')}`);
         break;
+    default: alert ('Вы ввели некорректный запрос');
 };
 
