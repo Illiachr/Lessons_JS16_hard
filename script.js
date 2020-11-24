@@ -12,5 +12,3 @@ let expr = prompt('Введите строку',
 console.log (expr.length);
 console.log (strTrim (expr));
 console.log (strTrim(expr).length);
-
-
