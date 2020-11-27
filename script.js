@@ -21,3 +21,4 @@ document.body.insertAdjacentHTML(
     <h2><i>Решение</i></h2>    
     ${days.join("<br>")}
     `);
+    
