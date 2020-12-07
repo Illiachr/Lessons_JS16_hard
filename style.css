@@ -1,0 +1,39 @@
+body {
+    margin: 0 auto;
+    color: #FFFFFF;
+    background-color: #909BF0;
+    font-family: Tahoma;
+    font-size: 36px;
+    font-weight: 900;
+    text-align: center;
+    transition: 2s all;
+}
+
+div {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+
+label {
+    display : block;
+    margin-bottom: 1rem;
+}
+button {
+    display : inline;
+    width: 260px;
+    height: 70px;
+    background: white;
+    color: #909BF0;
+    border: none;
+    border-radius: 5px;
+    font-family: Tahoma;
+    font-size: 24px;
+    font-weight: 700;
+    transition: 1s all;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
