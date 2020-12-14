@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('../css/normalize.css');
+
 body {
-    box-sizing: border-box;
+    background-color: grey;
+    min-height: 100vh;    
+    font-family:'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+
+h2 {
+    padding-top: 5rem;
 }
 
 .app {
@@ -8,6 +19,14 @@ body {
     padding: 4rem;
 }
 
-h2 {
-    padding-top: 5rem;
+.text-input {
+    width: 60%;
+    height: 2rem;
+    border: none;
+    border-radius: 20px;
+    margin: 4rem;
+}
+
+.text-input:focus {
+    border: none;
 }
