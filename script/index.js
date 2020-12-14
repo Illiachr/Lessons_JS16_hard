@@ -43,8 +43,8 @@ const sayHello = (nowHours) => {
 const createElement = (mainSelector, tagElem = 'div', classElem = 'app-block', idElem = 'app') => {
     const app = document.querySelector(`.${mainSelector}`),
         elem = document.createElement(tagElem);
-    elem.classList.add = classElem;
-    elem.id = idElem;
+    elem.classList.add(classElem);
+    elem.setAttribute('id', idElem);
     app.append(elem);
     return elem;    
 };
