@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					const response = JSON.parse(request.responseText);
 					resolve(response);
 				} else {
-					reject(); // output.innerHTML = 'Произошла ошибка';
+					reject();
 				}
 			});
 		}),
