@@ -3,17 +3,22 @@
 /*
  //1. Добавление авто в таблицу
 //2. Фильтрация авто по признакам (без изменнеия основного массива)
-3. Сортировка по признаку (убывание, возрастание)
+//3. Сортировка по признаку (убывание, возрастание)
 4. Сброс - возвращение к исходной таблице
-5. Пересоздание опций - удаление текущих и создание новых
+5. Пересоздание опций - удаление текущих и создание новых*
+6. отмена сортировки*
+7. сохранение в LocalStorage*
+8. редизайн (добавить сайд бар с настройками)
 */
 
-const carTable = document.getElementById('car-table'),
+const carTableHeader = document.getElementById('car-table-header'),
+    carTable = document.getElementById('car-table'),
     addForm = document.getElementById('add'),
     filterForm = document.getElementById('filter'),
     dataURL = './cars.json';
 let carDb = [],
-    filtredCars = [];
+    filtredCars = [],
+    click = 0;
 const carToTable = arr => {
         carTable.textContent = '';
         arr.forEach((car, i) => {
@@ -31,15 +36,12 @@ const carToTable = arr => {
 
     addFilterOptions = arr => {
         [...filterForm.elements].forEach(elem => {
-            console.log(elem);
             if (elem.matches('select')) {
-                console.log(elem);
                 arr.forEach(car => {
                     const val = `${car[elem.name]}`;
                     const isValue = [...elem.options].find(
                         option => option.value.toLowerCase() === val.toLowerCase()
                     );
-                    console.log(val);
                     if (!isValue) {
                         elem.appendChild(new Option(`${Number(val) === 0 ?
                             'без пробега' : val}`, val));
@@ -50,6 +52,19 @@ const carToTable = arr => {
     },
 
     getArrShadow = (arr, elem) => arr.filter(car => `${car[elem.name]}`.toLowerCase() === elem.value.toLowerCase()),
+    sortString = (a, b, key) => {
+        if (a[key].toLowerCase() > b[key].toLowerCase()) { return 1; }
+        if (a[key].toLowerCase() < b[key].toLowerCase()) { return -1; }
+        return 0;
+    },
+    sortStringRevers = (a, b, key) => {
+        if (a[key].toLowerCase() > b[key].toLowerCase()) { return -1; }
+        if (a[key].toLowerCase() < b[key].toLowerCase()) { return 1; }
+        return 0;
+    },
+
+    sortNum = (a, b, key) => a[key] - b[key],
+    sortNumRevers = (a, b, key) => b[key] - a[key],
 
     handlAddCar = e => {
         e.preventDefault();
@@ -70,7 +85,40 @@ const carToTable = arr => {
             filtredCars = getArrShadow(filtredCars, target);
         } else if (carTable.querySelectorAll('tr').length > 0) { filtredCars = getArrShadow(carDb, target); }
         carToTable(filtredCars);
-    }; // end handlFilter
+    }, // end handlFilter
+
+    handlSort = e => {
+        const key = e.target.dataset.name;
+        if (key === 'brand' || key === 'model') {
+            if (click < 1) {
+                if (filtredCars.length > 0) {
+                    filtredCars = filtredCars.sort((a, b) => sortString(a, b, key));
+                } else {
+                    filtredCars = carDb.sort((a, b) => sortString(a, b, key));
+                }
+                click++;
+            } else {
+                filtredCars = filtredCars.sort((a, b) => sortStringRevers(a, b, key));
+                carToTable(filtredCars);
+                click--;
+            }
+        }
+        if (key === 'year' || key === 'mileage') {
+            if (click < 1) {
+                if (filtredCars.length > 0) {
+                    filtredCars = filtredCars.sort((a, b) => sortNum(a, b, key));
+                } else {
+                    filtredCars = carDb.sort((a, b) => sortNum(a, b, key));
+                }
+                click++;
+            } else {
+                filtredCars = carDb.sort((a, b) => sortNumRevers(a, b, key));
+                carToTable(filtredCars);
+                click--;
+            }
+        }
+        carToTable(filtredCars);
+    };
 
 fetch(dataURL)
     .then(res => {
@@ -78,7 +126,6 @@ fetch(dataURL)
         return res.json();
     })
     .then(data => {
-        console.log(data);
         carDb = data.cars;
         carToTable(carDb);
         addFilterOptions(carDb);
@@ -87,3 +134,4 @@ fetch(dataURL)
 
 addForm.addEventListener('submit', handlAddCar);
 filterForm.addEventListener('change', handlFilter);
+carTableHeader.addEventListener('click', handlSort);
