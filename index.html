@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/index.js" defer></script>
+    <title>Car Shop</title>
+</head>
+<body>
+    <div class="container">
+        <form id="add" class="form-inline mt-4 mb-5">
+            <div class="form-group mb-3">                
+                <input type="text" name="brand" class="form-control mr-1" placeholder="Марка">
+                <input type="text" name="model" class="form-control mr-1" placeholder="Модель">
+                <input type="text" name="year" class="form-control mr-1" placeholder="год выпуска">
+                <input type="text" name="mileage" class="form-control mr-1" placeholder="пробег, км">
+                <button id="add-auto" type="submit" class="btn btn-primary">Добавить авто</button>
+            </div>            
+        </form>
+        <form id="filter" class="form-inline mt-4 mb-5">            
+            <div class="form-group filter-panel">
+                <div class="col">
+                    <select name="brand" class="form-control mr-1 model-filter">
+                        <option value="no">по марке</option>                        
+                    </select>
+                    <select name="model" class="form-control mr-1 model-filter">
+                        <option value="no">по модели</option>                    
+                    </select>
+                    <select name="year" class="form-control mr-1 model-filter">
+                        <option value="no">по году выпуска</option>
+                    </select>
+                    <select name="mileage" class="form-control mr-1 model-filter">
+                        <option value="no">по пробегу</option>
+                    </select>
+                </div>                
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Марка</th>
+                    <th scope="col">Модель</th>
+                    <th scope="col">Год выпуска</th>
+                    <th scope="col">Пробег, км</th>
+                </tr>
+            </thead>
+            <tbody id="car-table"></tbody>
+        </table>
+    </div>
+</body>
+</html>

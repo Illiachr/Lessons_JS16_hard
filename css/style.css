@@ -1,0 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
+input, select {
+    max-width: 200px;
+}
