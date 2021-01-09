@@ -105,7 +105,9 @@ const carToTable = arr => {
         });
         carDb.push(carItem);
         carToTable(carDb);
-        addFilterOptions(carDb, false);
+        addFilterOptions(carDb);
+        addForm.classList.add('d-none');
+        addForm.previousElementSibling.classList.remove('d-none');
 
     }, // end handlAddCar
     handlFilter = e => {
@@ -281,7 +283,10 @@ fetch(dataURL)
     })
     .catch(err => console.log(err));
 
-
+document.querySelector('#add-menu').addEventListener('click', e => {
+    e.target.classList.add('d-none');
+    addForm.classList.remove('d-none');
+});
 addForm.addEventListener('submit', handlAddCar);
 filterForm.addEventListener('click', handlClick);
 filterForm.addEventListener('change', handlFilter);
