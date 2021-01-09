@@ -5,50 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/668b42271a.js" crossorigin="anonymous"></script>
     <script src="js/index.js" defer></script>
     <title>Car Shop</title>
 </head>
 <body>
     <div class="container">
-        <form id="add" class="form-inline mt-4 mb-5">
-            <div class="form-group mb-3">                
-                <input type="text" name="brand" class="form-control mr-1" placeholder="Марка">
-                <input type="text" name="model" class="form-control mr-1" placeholder="Модель">
-                <input type="text" name="year" class="form-control mr-1" placeholder="год выпуска">
-                <input type="text" name="mileage" class="form-control mr-1" placeholder="пробег, км">
-                <button id="add-auto" type="submit" class="btn btn-primary">Добавить авто</button>
-            </div>            
-        </form>
-        <form id="filter" class="form-inline mt-4 mb-5">            
-            <div class="form-group filter-panel">
-                <div class="col">
-                    <select name="brand" class="form-control mr-1 model-filter">
-                        <option value="no">по марке</option>                        
-                    </select>
-                    <select name="model" class="form-control mr-1 model-filter">
-                        <option value="no">по модели</option>                    
-                    </select>
-                    <select name="year" class="form-control mr-1 model-filter">
-                        <option value="no">по году выпуска</option>
-                    </select>
-                    <select name="mileage" class="form-control mr-1 model-filter">
-                        <option value="no">по пробегу</option>
-                    </select>
-                </div>                
+        <div class="row mt-5">
+            <div class="col-3">
+                <button id="add-menu" type="button" class="btn btn-secondary w-100 mb-3">Добавить авто...</button>
+                <form id="add" class="form d-none">
+                    <div class="form-group mb-4">
+                        <label>Марка</label>             
+                        <input type="text" name="brand" class="form-control mb-3" placeholder="Введите марку...">
+                        <label>Модель</label>
+                        <input type="text" name="model" class="form-control mb-3" placeholder="Введите модель...">
+                        <label>Год выпуска</label>
+                        <input type="text" name="year" class="form-control mb-3" placeholder="Введите год выпуска...">
+                        <label>Пробег, км</label>
+                        <input type="text" name="mileage" class="form-control mb-3" placeholder="Введите пробег...">
+                        <button id="add-auto" type="submit" class="btn btn-secondary w-100">Добавить авто</button>
+                    </div>            
+                    <hr>
+                </form>
+                <button id="filter-menu" type="button" class="btn btn-secondary w-100">Фильтр...</button>                
+                <form id="filter" class="form mt-4 mb-5 d-none">            
+                    <div class="form-group filter-panel">
+                        <h5>Фильтр</h5>
+                            <label data-name="Марка" class="w-100"><span>Марка</span><button class="close d-none"><i class="fas fa-times"></i></button></label>
+                            <select name="brand" class="form-control model-filter mb-3">
+                                <option value="no">--</option>                        
+                            </select>
+                            <hr class="d-none">
+                            <label data-name="Модель" class="w-100"><span>Модель</span><button class="close d-none"><i class="fas fa-times"></i></button></label>
+                            <select name="model" class="form-control model-filter mb-3">
+                                <option value="no">--</option>                    
+                            </select>
+                            <hr class="d-none">
+                            <label data-name="Год выпуска" class="w-100"><span>Год выпуска</span><button class="close d-none"><i class="fas fa-times"></i></button></label>
+                            <select name="year" class="form-control model-filter mb-3">
+                                <option value="no">--</option>
+                            </select>
+                            <hr class="d-none">
+                            <label data-name="Пробег" class="w-100"><span>Пробег</span><button class="close d-none"><i class="fas fa-times"></i></button></label>
+                            <select name="mileage" class="form-control model-filter mb-3">
+                                <option value="no">--</option>
+                            </select>
+                            <button id="reset" type="reset" class="btn btn-secondary w-100">Сбросить фильтры</button>
+                    </div>
+                </form>
             </div>
-        </form>
-        <table id="car-table-header" class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" data-name="num">№</th>
-                    <th scope="col" data-name="brand">Марка</th>
-                    <th scope="col" data-name="model">Модель</th>
-                    <th scope="col" data-name="year">Год выпуска</th>
-                    <th scope="col" data-name="mileage">Пробег, км</th>
-                </tr>
-            </thead>
-            <tbody id="car-table"></tbody>
-        </table>
+            <div class="col-8 ml-auto mr-auto">
+                <table id="car-table-header" class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" data-name="num">
+                                <i class="fas fa-sort-down mr-2"></i>
+                                <i class="fas fa-sort-up mr-2 d-none"></i>
+                                №</th>
+                            <th scope="col" data-name="brand">
+                                <i class="fas fa-sort mr-2"></i>
+                                <i class="fas fa-sort-alpha-up mr-2 d-none"></i>
+                                <i class="fas fa-sort-alpha-down mr-2 d-none"></i>
+                                Марка</th>
+                            <th scope="col" data-name="model">
+                                <i class="fas fa-sort mr-2"></i>
+                                <i class="fas fa-sort-alpha-up mr-2 d-none"></i>
+                                <i class="fas fa-sort-alpha-down mr-2 d-none"></i>
+                                Модель</th>
+                            <th scope="col" data-name="year">
+                                <i class="fas fa-sort mr-2"></i>
+                                <i class="fas fa-sort-numeric-up mr-2 d-none"></i>
+                                <i class="fas fa-sort-numeric-down mr-2 d-none"></i>
+                                Год выпуска</th>
+                            <th scope="col" data-name="mileage">
+                                <i class="fas fa-sort mr-2"></i>
+                                <i class="fas fa-sort-numeric-up mr-2 d-none"></i>
+                                <i class="fas fa-sort-numeric-down mr-2 d-none"></i>
+                                Пробег, км</th>
+                        </tr>
+                    </thead>
+                    <tbody id="car-table"></tbody>
+                </table>
+            </div>
+        </div>  
     </div>
 </body>
 </html>

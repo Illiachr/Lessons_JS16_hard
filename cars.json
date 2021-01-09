@@ -1,52 +1,604 @@
 {
-  "cars": [
+    "cars": [
     {
-      "brand": "bmw",
-      "model": "M5",
-      "year": 2020,
-      "mileage": 0
+    "brand": "Audi",
+    "model": "Q3",
+    "year": 2004,
+    "mileage": 18605
     },
     {
-      "brand": "volvo",
-      "model": "V90",
-      "year": 2020,
-      "mileage": 0
+    "brand": "Chevrolet",
+    "model": "Malibu",
+    "year": 2020,
+    "mileage": 13577
     },
     {
-      "brand": "bmw",
-      "model": "M5",
-      "year": 2019,
-      "mileage": 10000
+    "brand": "Cadillac",
+    "model": "Escalade ESV",
+    "year": 1998,
+    "mileage": 11101
     },
     {
-      "brand": "volvo",
-      "model": "V90",
-      "year": 2019,
-      "mileage": 10000
+    "brand": "Chevrolet",
+    "model": "Corvette",
+    "year": 2009,
+    "mileage": 12831
     },
     {
-      "brand": "Fiat",
-      "model": "Punto",
-      "year": 2018,
-      "mileage": 5000
+    "brand": "Acura",
+    "model": "RLX",
+    "year": 2019,
+    "mileage": 11181
     },
     {
-      "brand": "Fiat",
-      "model": "Punto",
-      "year": 2017,
-      "mileage": 5000
+    "brand": "Chevrolet",
+    "model": "Silverado 2500 HD Crew Cab",
+    "year": 2004,
+    "mileage": 17387
     },
     {
-      "brand": "Fiat",
-      "model": "Punto",
-      "year": 2020,
-      "mileage": 0
+    "brand": "BMW",
+    "model": "3 Series",
+    "year": 1995,
+    "mileage": 11566
     },
     {
-      "brand": "Nissan",
-      "model": "Juke",
-      "year": 2021,
-      "mileage": 0
+    "brand": "Chrysler",
+    "model": "Pacifica",
+    "year": 2001,
+    "mileage": 12655
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Colorado Crew Cab",
+    "year": 2014,
+    "mileage": 19638
+    },
+    {
+    "brand": "BMW",
+    "model": "X3",
+    "year": 2020,
+    "mileage": 10158
+    },
+    {
+    "brand": "Acura",
+    "model": "TLX",
+    "year": 1995,
+    "mileage": 18325
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Silverado 3500 HD Crew Cab",
+    "year": 2017,
+    "mileage": 19119
+    },
+    {
+    "brand": "BMW",
+    "model": "7 Series",
+    "year": 2017,
+    "mileage": 14196
+    },
+    {
+    "brand": "Ford",
+    "model": "Fusion",
+    "year": 1995,
+    "mileage": 11775
+    },
+    {
+    "brand": "Buick",
+    "model": "Envision",
+    "year": 1998,
+    "mileage": 13211
+    },
+    {
+    "brand": "Audi",
+    "model": "SQ5",
+    "year": 2017,
+    "mileage": 18383
+    },
+    {
+    "brand": "Audi",
+    "model": "R8",
+    "year": 1991,
+    "mileage": 10536
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Traverse",
+    "year": 1996,
+    "mileage": 14486
+    },
+    {
+    "brand": "Acura",
+    "model": "MDX",
+    "year": 2015,
+    "mileage": 10076
+    },
+    {
+    "brand": "INFINITI",
+    "model": "QX80",
+    "year": 1990,
+    "mileage": 11983
+    },
+    {
+    "brand": "Buick",
+    "model": "Encore",
+    "year": 2019,
+    "mileage": 12072
+    },
+    {
+    "brand": "GMC",
+    "model": "Sierra 2500 HD Crew Cab",
+    "year": 2003,
+    "mileage": 11451
+    },
+    {
+    "brand": "Honda",
+    "model": "Insight",
+    "year": 1993,
+    "mileage": 14242
+    },
+    {
+    "brand": "Cadillac",
+    "model": "XT6",
+    "year": 2020,
+    "mileage": 18437
+    },
+    {
+    "brand": "Cadillac",
+    "model": "XT5",
+    "year": 2018,
+    "mileage": 13727
+    },
+    {
+    "brand": "Cadillac",
+    "model": "XT4",
+    "year": 2016,
+    "mileage": 18146
+    },
+    {
+    "brand": "Buick",
+    "model": "Enclave",
+    "year": 1993,
+    "mileage": 12359
+    },
+    {
+    "brand": "Audi",
+    "model": "Q5",
+    "year": 2004,
+    "mileage": 11137
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Santa Fe",
+    "year": 2005,
+    "mileage": 19089
+    },
+    {
+    "brand": "Ford",
+    "model": "EcoSport",
+    "year": 1997,
+    "mileage": 15111
+    },
+    {
+    "brand": "Ford",
+    "model": "Escape",
+    "year": 2010,
+    "mileage": 17529
+    },
+    {
+    "brand": "Ford",
+    "model": "Mustang",
+    "year": 1994,
+    "mileage": 15565
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Sonata",
+    "year": 2012,
+    "mileage": 10953
+    },
+    {
+    "brand": "Ford",
+    "model": "Edge",
+    "year": 2020,
+    "mileage": 14548
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 1997,
+    "mileage": 10404
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Kona Electric",
+    "year": 1993,
+    "mileage": 18298
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Equinox",
+    "year": 2012,
+    "mileage": 13488
+    },
+    {
+    "brand": "GMC",
+    "model": "Sierra 3500 HD Crew Cab",
+    "year": 2005,
+    "mileage": 12436
+    },
+    {
+    "brand": "Jeep",
+    "model": "Gladiator",
+    "year": 1992,
+    "mileage": 12586
+    },
+    {
+    "brand": "BMW",
+    "model": "X7",
+    "year": 2000,
+    "mileage": 17619
+    },
+    {
+    "brand": "Cadillac",
+    "model": "CT6-V",
+    "year": 2014,
+    "mileage": 11553
+    },
+    {
+    "brand": "Audi",
+    "model": "A7",
+    "year": 2008,
+    "mileage": 13498
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Blazer",
+    "year": 2020,
+    "mileage": 13468
+    },
+    {
+    "brand": "Ford",
+    "model": "F150 SuperCrew Cab",
+    "year": 2015,
+    "mileage": 15636
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Suburban",
+    "year": 2001,
+    "mileage": 18957
+    },
+    {
+    "brand": "Honda",
+    "model": "Civic",
+    "year": 1999,
+    "mileage": 16489
+    },
+    {
+    "brand": "Jeep",
+    "model": "Compass",
+    "year": 2008,
+    "mileage": 12139
+    },
+    {
+    "brand": "Cadillac",
+    "model": "Escalade",
+    "year": 1997,
+    "mileage": 19902
+    },
+    {
+    "brand": "Chrysler",
+    "model": "Voyager",
+    "year": 2014,
+    "mileage": 11127
+    },
+    {
+    "brand": "Honda",
+    "model": "Accord Hybrid",
+    "year": 1998,
+    "mileage": 12883
+    },
+    {
+    "brand": "GMC",
+    "model": "Terrain",
+    "year": 2005,
+    "mileage": 11407
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Spark",
+    "year": 1993,
+    "mileage": 10001
+    },
+    {
+    "brand": "GMC",
+    "model": "Sierra 1500 Crew Cab",
+    "year": 2017,
+    "mileage": 19505
+    },
+    {
+    "brand": "Hyundai",
+    "model": "NEXO",
+    "year": 2002,
+    "mileage": 18131
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Veloster",
+    "year": 2006,
+    "mileage": 12890
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Silverado 1500 Crew Cab",
+    "year": 2002,
+    "mileage": 10300
+    },
+    {
+    "brand": "Genesis",
+    "model": "G70",
+    "year": 2017,
+    "mileage": 15909
+    },
+    {
+    "brand": "Cadillac",
+    "model": "CT5",
+    "year": 1999,
+    "mileage": 12364
+    },
+    {
+    "brand": "Honda",
+    "model": "Odyssey",
+    "year": 1993,
+    "mileage": 10842
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Elantra GT",
+    "year": 2006,
+    "mileage": 16996
+    },
+    {
+    "brand": "Acura",
+    "model": "RDX",
+    "year": 2005,
+    "mileage": 17866
+    },
+    {
+    "brand": "GMC",
+    "model": "Yukon XL",
+    "year": 2007,
+    "mileage": 12318
+    },
+    {
+    "brand": "Ford",
+    "model": "Ranger SuperCab",
+    "year": 2007,
+    "mileage": 10197
+    },
+    {
+    "brand": "Ford",
+    "model": "Expedition MAX",
+    "year": 1997,
+    "mileage": 16609
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Kona",
+    "year": 2010,
+    "mileage": 12991
+    },
+    {
+    "brand": "INFINITI",
+    "model": "QX50",
+    "year": 2017,
+    "mileage": 13735
+    },
+    {
+    "brand": "Dodge",
+    "model": "Durango",
+    "year": 2008,
+    "mileage": 10404
+    },
+    {
+    "brand": "GMC",
+    "model": "Yukon",
+    "year": 2001,
+    "mileage": 11431
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Palisade",
+    "year": 2004,
+    "mileage": 12809
+    },
+    {
+    "brand": "Honda",
+    "model": "Ridgeline",
+    "year": 2009,
+    "mileage": 14836
+    },
+    {
+    "brand": "Jeep",
+    "model": "Cherokee",
+    "year": 2016,
+    "mileage": 14892
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Bolt EV",
+    "year": 2015,
+    "mileage": 10702
+    },
+    {
+    "brand": "Ford",
+    "model": "Expedition",
+    "year": 1995,
+    "mileage": 12676
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 1993,
+    "mileage": 15088
+    },
+    {
+    "brand": "Honda",
+    "model": "Passport",
+    "year": 2009,
+    "mileage": 17334
+    },
+    {
+    "brand": "Dodge",
+    "model": "Charger",
+    "year": 1993,
+    "mileage": 16860
+    },
+    {
+    "brand": "Honda",
+    "model": "Accord",
+    "year": 2000,
+    "mileage": 14897
+    },
+    {
+    "brand": "INFINITI",
+    "model": "QX60",
+    "year": 2002,
+    "mileage": 10691
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Venue",
+    "year": 1997,
+    "mileage": 12079
+    },
+    {
+    "brand": "Honda",
+    "model": "Pilot",
+    "year": 2013,
+    "mileage": 11909
+    },
+    {
+    "brand": "Jeep",
+    "model": "Grand Cherokee",
+    "year": 2007,
+    "mileage": 10042
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Tahoe",
+    "year": 2016,
+    "mileage": 16652
+    },
+    {
+    "brand": "GMC",
+    "model": "Acadia",
+    "year": 2020,
+    "mileage": 10945
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Impala",
+    "year": 2020,
+    "mileage": 18763
+    },
+    {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2013,
+    "mileage": 14269
+    },
+    {
+    "brand": "BMW",
+    "model": "X5",
+    "year": 1995,
+    "mileage": 11945
+    },
+    {
+    "brand": "INFINITI",
+    "model": "Q60",
+    "year": 2008,
+    "mileage": 15293
+    },
+    {
+    "brand": "Ford",
+    "model": "Ranger SuperCrew",
+    "year": 2003,
+    "mileage": 11654
+    },
+    {
+    "brand": "Chevrolet",
+    "model": "Trax",
+    "year": 2018,
+    "mileage": 18753
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Ioniq Plug-in Hybrid",
+    "year": 1997,
+    "mileage": 16891
+    },
+    {
+    "brand": "Jaguar",
+    "model": "E-PACE",
+    "year": 1996,
+    "mileage": 17475
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Tucson",
+    "year": 2001,
+    "mileage": 18720
+    },
+    {
+    "brand": "Ford",
+    "model": "Explorer",
+    "year": 2015,
+    "mileage": 19453
+    },
+    {
+    "brand": "Honda",
+    "model": "HR-V",
+    "year": 1992,
+    "mileage": 16192
+    },
+    {
+    "brand": "Jaguar",
+    "model": "I-PACE",
+    "year": 2002,
+    "mileage": 11495
+    },
+    {
+    "brand": "INFINITI",
+    "model": "Q50",
+    "year": 2014,
+    "mileage": 15592
+    },
+    {
+    "brand": "Genesis",
+    "model": "G80",
+    "year": 2003,
+    "mileage": 10991
+    },
+    {
+    "brand": "Jaguar",
+    "model": "F-PACE",
+    "year": 1995,
+    "mileage": 13880
+    },
+    {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2008,
+    "mileage": 19434
+    },
+    {
+    "brand": "Hyundai",
+    "model": "Accent",
+    "year": 1991,
+    "mileage": 12222
     }
   ]
 }
