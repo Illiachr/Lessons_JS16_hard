@@ -5,11 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
         carTable = document.getElementById('car-table'),
         addForm = document.getElementById('add'),
         filterForm = document.getElementById('filter'),
-        dataURL = './cars.json',
-        cachedCars = new Map();
+        filterFormSelectAll = [...filterForm.elements].filter(item => item.tagName.toLowerCase() === 'select'),
+        dataURL = './cars.json';
     let carDb = [],
         filtredCars = [],
-        filtredCarsCache = [],
         click = 0;
 
     const carToTable = arr => {
@@ -26,19 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `);
             });
         }, // end carToTable
-
-        // addOptionsFromCache = (cachObj, elem) => {
-        //     elem.textContent = '';
-        //     elem.append(new Option(`--`, `no`));
-        //     cachObj[elem.name].forEach(item => {
-        //         const optionValue = item;
-        //         if (optionValue !== 'no') {
-        //             elem.append(new Option(`${Number(optionValue) === 0 ?
-        //                 'без пробега' : optionValue}`, optionValue));
-        //         }
-        //     });
-        //     //filtredCars[elem.name] = cachObj[elem.name];
-        // },
         resetSelectOptions = form => {
             [...form.elements].forEach(elem => {
                 if (elem.matches('select')) {
@@ -66,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         },
-
         getArrShadow = (arr, elem) => arr.filter(car => `${car[elem.name]}`.toLowerCase() === elem.value.toLowerCase()),
         sortString = (a, b, key) => {
             if (a[key].toLowerCase() > b[key].toLowerCase()) { return 1; }
@@ -103,15 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 elem.classList.remove('d-none');
             } else { elem.classList.add('d-none'); }
         },
-        tglLabelElems = (selectElem, dataName = false) => {
+        tglLabelElems = (selectElem, dataName = false, mode = 'toggle') => {
             const labelFilter = selectElem.previousElementSibling,
                 filterTitle = selectElem.previousElementSibling.firstElementChild,
                 closeBtn = selectElem.previousElementSibling.lastElementChild,
                 divider = selectElem.nextElementSibling.matches('hr') ? selectElem.nextElementSibling : null;
             filterTitle.textContent = dataName ? labelFilter.dataset.name : selectElem.value;
-            tglElemDisplay(closeBtn);
-            tglElemDisplay(selectElem);
-            tglElemDisplay(divider);
+            if (mode === 'toggle') {
+                tglElemDisplay(closeBtn);
+                tglElemDisplay(selectElem);
+                tglElemDisplay(divider);
+            }
+
+            if (mode === 'none') {
+                closeBtn.classList.add('d-none');
+                selectElem.classList.remove('d-none');
+                if (divider) { divider.classList.add('d-none'); }
+            }
         },
         render = arr => {
             carToTable(arr);
@@ -122,61 +115,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target.matches('select')) {
                 tglLabelElems(target);
                 if (filtredCars.length) {
-                    filtredCarsCache = filtredCars.slice(0, filtredCars.length);
                     filtredCars = getArrShadow(filtredCars, target);
                 } else if (carTable.querySelectorAll('tr').length > 0) {
                     filtredCars = getArrShadow(carDb, target);
                 }
-                e.target.dataset.order = cachedCars.size;
             }
             render(filtredCars);
-            cachedCars.set(cachedCars.size, filtredCars);
-            if (filtredCarsCache.length) { console.log(filtredCarsCache); }
-            console.log(filtredCars);
         }, // end handlFilter
 
         handlFilterClick = e => {
             e.preventDefault();
             if (e.target.closest('.close')) {
-                console.log(e.target);
-                const elem = e.target.closest('label').nextElementSibling;
-                //  label = e.target.closest('label'),
-                //     closeBtn = e.target.closest('.close'),
-                //     labelTitle = label.firstElementChild,
-                //     elem = e.target.closest('label').nextElementSibling,
-                //     divider = elem.nextElementSibling.matches('hr') ? elem.nextElementSibling : null;
-                tglLabelElems(elem, true);
-                console.dir(elem.parentNode);
-                // labelTitle.textContent = label.dataset.name;
-                // closeBtn.classList.add('d-none');
-                elem.classList.remove('d-none');
-                //if (divider) { tglElemDisplay(divider); }
-                for (let i = Number(elem.dataset.order); i <= cachedCars.size; i++) {
-                    cachedCars.delete(i);
-                }
-                console.log(cachedCars);
-                if (cachedCars.size > 1) {
-                    carToTable(cachedCars.get(cachedCars.size - 1));
-                    addFilterOptions(cachedCars.get(cachedCars.size - 1));
-                } else {
-                    carToTable(carDb);
-                    addFilterOptions(carDb);
-                }
+                filterFormSelectAll.forEach(elem => tglLabelElems(elem, true, 'none'));
+                filtredCars = [];
+                render(carDb);
             }
             if (e.target.matches('#reset')) {
                 console.log(e.target);
-                document.querySelectorAll('#filter label').forEach(elem => {
-                    if (elem.matches('label')) {
-                        elem.removeAttribute('data-order');
-                        elem.firstElementChild.textContent = elem.dataset.name;
-                        elem.lastElementChild.classList.add('d-none');
-                        elem.nextElementSibling.classList.remove('d-none');
-                    }
+                filterFormSelectAll.forEach(elem => {
+                    tglLabelElems(elem, true, 'none');
                 });
-                for (let i = 0; i <= cachedCars.size; i++) {
-                    cachedCars.delete(i);
-                }
-                document.querySelectorAll('#filter hr').forEach(elem => elem.classList.add('d-none'));
+                filtredCars = [];
                 document.querySelectorAll('thead th').forEach(cell => {
                     [...cell.children].forEach((btn, i) => {
                         if (i !== 0) {
@@ -184,16 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else { btn.classList.remove('d-none'); }
                     });
                 });
-
-                carToTable(carDb);
-                addFilterOptions(carDb);
+                render(carDb);
             }
         },
 
-        handlSort = e => {
-            let headerCell = e.target;
-            if (!e.target.matches('thead th')) { headerCell = e.target.closest('thead th'); }
-            const key = headerCell.dataset.name;
+        setSortIcon = key => {
             document.querySelectorAll('thead th').forEach(cell => {
                 if (cell.dataset.name !== key) {
                     [...cell.children].forEach((btn, i) => {
@@ -205,15 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     cell.children[0].classList.add('d-none');
                 }
             });
+        },
+
+        handlSort = e => {
+            const headerCell = !e.target.matches('thead th') ? e.target.closest('thead th') : e.target,
+                key = headerCell.dataset.name;
+            setSortIcon(key);
+
+            if (!filtredCars.length) { filtredCars = carDb.slice(0, carDb.length); }
 
             if (key === 'num') {
                 if (click < 1) {
                     if (filtredCars.length > 0) {
                         filtredCars = filtredCars.reverse();
-                        headerCell.children[1].classList.remove('d-none');
-                        headerCell.children[0].classList.add('d-none');
-                    } else {
-                        filtredCars = carDb.reverse();
                         headerCell.children[1].classList.remove('d-none');
                         headerCell.children[0].classList.add('d-none');
                     }
@@ -225,17 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     carToTable(filtredCars);
                     click--;
                 }
-                carToTable(filtredCars);
             }
 
             if (key === 'brand' || key === 'model' && e.target.value !== 'no') {
                 if (click < 1) {
                     if (filtredCars.length > 0) {
                         filtredCars = filtredCars.sort((a, b) => sortString(a, b, key));
-                        headerCell.children[1].classList.remove('d-none');
-                        headerCell.children[2].classList.add('d-none');
-                    } else {
-                        filtredCars = carDb.sort((a, b) => sortString(a, b, key));
                         headerCell.children[1].classList.remove('d-none');
                         headerCell.children[2].classList.add('d-none');
                     }
@@ -247,16 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     carToTable(filtredCars);
                     click--;
                 }
-                carToTable(filtredCars);
             } // end event text sort
             if (key === 'year' || key === 'mileage') {
                 if (click < 1) {
                     if (filtredCars.length > 0) {
                         filtredCars = filtredCars.sort((a, b) => sortNum(a, b, key));
-                        headerCell.children[1].classList.remove('d-none');
-                        headerCell.children[2].classList.add('d-none');
-                    } else {
-                        filtredCars = carDb.sort((a, b) => sortNum(a, b, key));
                         headerCell.children[1].classList.remove('d-none');
                         headerCell.children[2].classList.add('d-none');
                     }
@@ -268,11 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     carToTable(filtredCars);
                     click--;
                 }
-                carToTable(filtredCars);
             } // end event numeric sort
 
-
-        //carToTable(filtredCars);
+            carToTable(filtredCars);
         };
 
     fetch(dataURL)
@@ -283,8 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             carDb = data.cars;
             render(carDb);
-            cachedCars.set('carDb', carDb);
-            console.log(cachedCars);
         })
         .catch(err => console.log(err));
 
