@@ -7,21 +7,10 @@ const listDefault = document.querySelector('.dropdown-lists__list--default'),
     refBtn =  document.querySelector('.button'),
     inputCities = document.getElementById('select-cities'),
     dataUrl = './db_cities.json';
-let data = {};
+let data = {},
+    localeData = [];
 
 const sortNum = (a, b, key) => a[key] - b[key];
-
-const manifest = {
-    cities: ['cities']
-};
-
-const pojectionReduce = meta => {
-    const keys = Object.keys(meta);
-    return obj => keys.reduce((newObj, key) => {
-        newObj[key] = meta[key].reduce((val, fn, i) => (i ? fn(val) : obj[fn]), null);
-        return newObj;
-    }, {});
-};
 
 const addCities = (list, arr, country) => {
     arr.forEach(city => {
@@ -34,7 +23,6 @@ const addCities = (list, arr, country) => {
     });
 };
 
-
 const addSelectCountry = (list, arrOfObj, country, cbAddCities) => {
     list.textContent = '';
     const obj = arrOfObj.filter(item => item.country === country)[0];
@@ -46,9 +34,9 @@ const addSelectCountry = (list, arrOfObj, country, cbAddCities) => {
         `);
     cbAddCities(list, obj.cities, country);
 };
-
+//.sort((a, b) => sortNum(a, b, "count")).reverse()
 const addCitiesTop = (list, arrOfObj, country) => {
-    arrOfObj.sort((a, b) => sortNum(a, b, "count")).reverse()
+    arrOfObj
         .forEach((city, index) => {
             if (index < 3) {
                 list.insertAdjacentHTML('beforeend', `
@@ -75,42 +63,39 @@ const addList = (list, arrOfObj, cbAddCities) => {
     });
 };
 
-
 const moveItem = (elem, drawFn, startPos, distance) => {
-        let start = null,
-            currentPos = startPos;
-        const step = timestamp => {
-            if (!start) { start = timestamp; }
-            const progress = timestamp - start;
-            currentPos = drawFn(elem, currentPos, progress);
-            if (startPos > distance) {
-                if (currentPos >= distance) {
-                    requestAnimationFrame(step);
-                } else {
-                    elem.style.transform = `translateX(${distance}%)`;
-                }
-            } else if (startPos < distance) {
-                if (currentPos <= distance) {
-                    requestAnimationFrame(step);
-                } else {
-                    elem.style.transform = `translateX(${distance}%)`;
-                }
+    let start = null,
+        currentPos = startPos;
+    const step = timestamp => {
+        if (!start) { start = timestamp; }
+        const progress = timestamp - start;
+        currentPos = drawFn(elem, currentPos, progress);
+        if (startPos > distance) {
+            if (currentPos >= distance) {
+                requestAnimationFrame(step);
+            } else {
+                elem.style.transform = `translateX(${distance}%)`;
             }
-        };
-
-        requestAnimationFrame(step);
-    },
-
-    drawLeft = (elem, currentLeft, progress) => {
-        elem.style.transform = `translateX(${currentLeft}%)`;
-        return currentLeft -= Math.floor((progress / 100));
-    },
-    drawRight = (elem, currentLeft, progress) => {
-        elem.style.transform = `translateX(${currentLeft}%)`;
-        return currentLeft += Math.floor((progress / 100));
+        } else if (startPos < distance) {
+            if (currentPos <= distance) {
+                requestAnimationFrame(step);
+            } else {
+                elem.style.transform = `translateX(${distance}%)`;
+            }
+        }
     };
 
+    requestAnimationFrame(step);
+};
 
+const drawLeft = (elem, currentLeft, progress) => {
+    elem.style.transform = `translateX(${currentLeft}%)`;
+    return currentLeft -= Math.floor((progress / 100));
+};
+const drawRight = (elem, currentLeft, progress) => {
+    elem.style.transform = `translateX(${currentLeft}%)`;
+    return currentLeft += Math.floor((progress / 100));
+};
 
 fetch(dataUrl)
     .then(res => {
@@ -118,9 +103,11 @@ fetch(dataUrl)
         return res.json();
     })
     .then(obj => {
-        data = obj;
+        const localeKey = 'DE';
+        data = obj[localeKey].sort((a, b) => sortNum(a, b, "count")).reverse();
         console.log(data);
-        addList(listDefault, data["RU"], addCitiesTop);
+        addList(listDefault, data, addCitiesTop);
+
     })
     .catch(err => console.warn(err));
 
@@ -133,7 +120,7 @@ document.querySelector('.input-cities').addEventListener('click', e => {
         moveItem(listSelect, drawLeft, 100, 0);
         label.textContent = 'Выберите город';
         cancelCountryBtn.style.display = 'inline';
-        addSelectCountry(listSelect, data["RU"], country, addCities);
+        addSelectCountry(listSelect, data, country, addCities);
     }
 
     if (e.target.closest('.dropdown-lists__line')) {
@@ -147,7 +134,7 @@ document.querySelector('.input-cities').addEventListener('click', e => {
         label.textContent = '';
         inputCities.value = citySelected.textContent;
         cancelCountryBtn.style.display = 'block';
-        addSelectCountry(listSelect, data["RU"], country, addCities);
+        addSelectCountry(listSelect, data, country, addCities);
         listSelect.querySelectorAll('.dropdown-lists__city').forEach(elem => {
             if (inputCities.value === elem.textContent) {
                 elem.classList.add('dropdown-lists__city--ip');
